@@ -13,7 +13,7 @@ inputs:
 outputs:
   - name: build-output
 
-run:
+run:    # shell script that builds gradle, writes file w/ next bump version
   path: bash
   args:
   - -exc

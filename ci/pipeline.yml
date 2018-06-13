@@ -1,4 +1,7 @@
 ---
+# jobs have muliple tasks, resources go into jobs
+
+
 resources:
 - name: pal-tracker
   type: git
@@ -45,7 +48,7 @@ jobs:
 - name: build
   plan:
   - get: pal-tracker
-    trigger: true
+    trigger: true   # will trigger build
   - get: version
     params: {bump: patch}
   - task: build and test
@@ -61,8 +64,8 @@ jobs:
   plan:
   - get: pal-tracker
   - get: pal-tracker-artifacts
-    trigger: true
-    passed: [build]
+    trigger: true     # trigger deploy review if
+    passed: [build]   # build job passes
   - put: review-deployment
     params:
       manifest: pal-tracker/manifest-review.yml
